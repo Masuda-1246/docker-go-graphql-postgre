@@ -13,12 +13,6 @@ RUN mkdir $APP_ROOT
 # ワーキングディレクトリの設定
 WORKDIR $APP_ROOT
 
-# Goの詳細設定
-ENV CGO_ENABLED=1 \
-  GOOS=linux \
-  GOARCH=amd64 \
-  GO111MODULE=on
-
 # ルートディレクトリを作業ディレクトリにコピー
 COPY . $APP_ROOT
 

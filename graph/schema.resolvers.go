@@ -7,18 +7,29 @@ package graph
 import (
 	"context"
 	"fmt"
+	"crypto/rand"
+	"math/big"
 
 	"github.com/Masuda-1246/docker-go-graphql-postgre/graph/model"
 )
 
 // CreateTodo is the resolver for the createTodo field.
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: CreateTodo - createTodo"))
+	//ランダムな数字の生成
+	rand, _ := rand.Int(rand.Reader, big.NewInt(100))
+	todo := &model.Todo{
+		Text:   input.Text,
+		ID:     fmt.Sprintf("T%d", rand),
+		User: &model.User{ID: input.UserID, Name: "user " + input.UserID},
+	}
+    //ここでのrはresolver.goで宣言したResolver型を示しているそのため、t.todosはresolver.goで先ほど記述したもの
+	r.todos = append(r.todos, todo)
+	return todo, nil
 }
 
 // Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: Todos - todos"))
+	return r.todos, nil
 }
 
 // Mutation returns MutationResolver implementation.
