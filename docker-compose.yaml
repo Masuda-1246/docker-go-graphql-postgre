@@ -21,7 +21,7 @@ services:
     environment:
       POSTGRES_DB: 'todo'  #データベース名
       POSTGRES_PASSWORD: 'password'  #データベースパスワード
-      POSTGRES_USER: 'postgres'  #データベースユーザ名
+      POSTGRES_USER: 'masuda'  #データベースユーザ名
       TimeZone: Asia/Tokyo  #タイムゾーン
     ports:
       - '5432:5432'
